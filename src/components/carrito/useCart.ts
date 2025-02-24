@@ -2,12 +2,12 @@ import { ref, computed, onMounted, onUnmounted, inject } from 'vue';
 
 import { PubSub } from '@/services/pubsub';
 import { type Pizza } from './PizzzaService';
-type dispose = () => void 
+
 
 export function useCart() {
     const pizzas = ref<Pizza[]>([]);
     const pubsub = inject<PubSub<Pizza>>('carrito');
-    let dispose:dispose|undefined;
+    let dispose:()=>void;
     
     const total = computed(() => pizzas.value.length);
     const totalPrice = computed(() => pizzas.value.reduce((acc, pizza) => acc + pizza.price, 0));
