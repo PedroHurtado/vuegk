@@ -4,7 +4,7 @@ export class PubSub<T> {
     emit(channel: string, data: T) {
         const channelSuscriptors = this.suscriptors.get(channel);
         if (channelSuscriptors) {
-            channelSuscriptors.forEach(f => f(data));
+            channelSuscriptors.forEach(f => f(structuredClone(data)));
         }
     }
 
