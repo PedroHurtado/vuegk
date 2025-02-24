@@ -9,9 +9,12 @@
 </template>
 <script setup lang="ts">
 import { type Pizza, ServicePizza } from './PizzzaService'
+import { inject } from 'vue';
+import { PubSub } from '@/services/pubsub';
 
 const service = new ServicePizza()
 const pizzas: Pizza[] = service.getAll()
+const pubsub = inject<PubSub<Pizza>>('carrito');
 
 function handlerClick(ev: Event) {
     const node = (ev.composedPath() as HTMLElement[]).find(n => n.dataset && 'id' in n.dataset)
@@ -19,8 +22,10 @@ function handlerClick(ev: Event) {
         const { id } = node.dataset
         if (id) {
             const pizza = service.getById(id)
-            if (pizza) {
-                document.dispatchEvent(createEvent(pizza))
+            if (pizza && pubsub) {                
+                pubsub.emit('carrito',pizza)                
+                //document.dispatchEvent(createEvent(pizza))
+                
             }
         }
     }
