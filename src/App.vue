@@ -7,6 +7,8 @@ import { type Pizza } from './components/carrito/PizzzaService'
 import Input from './components/input/Input.vue';
 import { useInput } from './components/input/useInput';
 import { provide } from 'vue';
+import Layout from './components/pages/Layout.vue';
+
 const pubsub = new PubSub<Pizza>()
 
 const phone = reactive(useInput());
@@ -15,7 +17,8 @@ provide('carrito', pubsub)
 
 </script>
 
-<template>  
+<template> 
+    <Layout/>
     <Input v-model="phone.value" label="Teléfono" id="phone" />
     {{ phone.value }}
     <Carrito/>    
