@@ -23,7 +23,8 @@ function handlerClick(ev: Event) {
         if (id) {
             const pizza = service.getById(id)
             if (pizza && pubsub) {                
-                pubsub.emit('carrito',pizza)                
+                pubsub.emit('carrito',pizza)  
+                              
                 //document.dispatchEvent(createEvent(pizza))
                 
             }

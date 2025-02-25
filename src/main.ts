@@ -1,6 +1,8 @@
 import './assets/main.css'
-
+import mitt from 'mitt';
+const emmiter = mitt();
 import { createApp } from 'vue'
 import App from './App.vue'
-
-createApp(App).mount('#app')
+const app = createApp(App);
+app.config.globalProperties.$bus = emmiter;
+app.mount('#app')

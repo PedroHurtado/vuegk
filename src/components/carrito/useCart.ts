@@ -25,6 +25,7 @@ export function useCart() {
     };
 
     onMounted(() => {
+        
         if(pubsub){
             dispose = pubsub.on('carrito', addPizza);
         }
