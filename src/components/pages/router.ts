@@ -1,22 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Page1 from './Page1.vue'
-import Page2 from './Page2.vue'
-import Page3 from './Page3.vue'
 
 export default createRouter({
     history: createWebHistory(),
     routes: [
       {
         path: '/',
-        component: Page1,
+        component: ()=>import('./Page1.vue'),
       },
       {
         path: '/page2',
-        component: Page2,
+        component: ()=>import('./Page2.vue'),
       },
       {
         path: '/page3',
-        component: Page3
+        component: ()=>import('./Page3.vue'),
       },
     ],
   })
