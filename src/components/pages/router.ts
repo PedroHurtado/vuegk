@@ -8,7 +8,7 @@ export default createRouter({
         component: ()=>import('./Page1.vue'),
       },
       {
-        path: '/page2',
+        path: '/page2/:id',
         component: ()=>import('./Page2.vue'),
       },
       {
