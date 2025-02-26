@@ -6,7 +6,7 @@ export async function useQuery<T>(url:string){
 
     try{
 
-        loading.value =false
+        loading.value =true
         const response = await fetch(url);
         if(!response.ok){
             throw new Error('No data available');
