@@ -17,8 +17,10 @@ const { data, error } = useQuery<Post>(url);
 
 
 const nextPage = () => {
-  page.value++;
-  url.value = getUrl(page.value);
+  if(!error.value){
+    page.value++;
+    url.value = getUrl(page.value);
+  }  
 };
 
 const prevPage = () => {
