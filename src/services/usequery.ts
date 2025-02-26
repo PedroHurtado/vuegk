@@ -5,9 +5,14 @@ export async function useQuery<T>(url:string){
     const error = ref(null);
 
     try{
+
         loading.value =false
         const response = await fetch(url);
+        if(!response.ok){
+            throw new Error('No data available');
+        }
         data.value = await response.json();
+        
     }
     catch(err: any){
         error.value = err;
