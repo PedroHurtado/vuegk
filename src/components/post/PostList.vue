@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useQuery } from "@/services/usequery";
 
 interface Post {
@@ -6,18 +7,36 @@ interface Post {
   title: string;
 }
 
-const url = "https://my-json-server.typicode.com/typicode/demo/posts"
-const { data, error } = await useQuery<Post[]>(url);
+const getUrl=(page:number)=>{
+  return `https://my-json-server.typicode.com/typicode/demo/posts/${page}`;
+}
+const page = ref(1);
+const url = ref(getUrl(page.value));
 
-;
+const { data, error } = useQuery<Post>(url);
+
+
+const nextPage = () => {
+  page.value++;
+  url.value = getUrl(page.value);
+};
+
+const prevPage = () => {
+  if (page.value > 1) {
+    page.value--;
+    url.value = getUrl(page.value);
+  }
+};
 </script>
 
 <template>
   <div>
-    <h1>Post List</h1>    
-    <p v-if="error">Error: {{error}}</p>
-    <ul v-if="data">
-      <li v-for="p in data" :key="p.id">{{ p.title }}</li>
-    </ul>
+    <h1>Post List</h1>
+    <p v-if="error">Error: {{ error.message }}</p>
+    <div v-if="data">{{data.title }}</div>
+    <div>
+      <button @click="prevPage" :disabled="page === 1">Anterior</button>
+      <button @click="nextPage">Siguiente</button>
+    </div>
   </div>
 </template>

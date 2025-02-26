@@ -1,21 +1,24 @@
-import { ref } from "vue";
-export async function useQuery<T>(url:string){
+import { ref, watchEffect, type Ref } from "vue";
 
-    const data = ref<T>();
-    const error = ref(null);
+export function useQuery<T>(url: Ref<string>) {
+    const data = ref<T | null>(null);
+    const error = ref<Error | null>(null);
 
-    try{
-        const response = await fetch(url);
-        if(!response.ok){
-            throw new Error('No data available');
+    const fetchData = async () => {
+        data.value = null;
+        error.value = null;
+        try {
+            const response = await fetch(url.value);
+            if (!response.ok) {
+                throw new Error('No data available');
+            }
+            data.value = await response.json();
+        } catch (err: any) {
+            error.value = err;
         }
-        data.value = await response.json();
-        
-    }
-    catch(err: any){
-        error.value = err;
-    }
-    
+    };
 
-    return { data, error};
+    watchEffect(fetchData); 
+
+    return { data, error };
 }

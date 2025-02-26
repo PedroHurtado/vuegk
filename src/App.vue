@@ -24,14 +24,16 @@ function handlerclick(ev:Event){
 </script>
 
 <template> 
+    <PostList/>
+    
+    
+    <!--
     <Suspense>
         <PostList/>
         <template #fallback>
             Loading...
         </template>
     </Suspense>
-    
-    <!--
     <Button @click="handlerclick($event)">Abrir dialog</Button>
     <Dialog ref="dialog">
         <input>
