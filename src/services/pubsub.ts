@@ -1,3 +1,4 @@
+
 export class PubSub<T> {
     private suscriptors = new Map<string, Array<(data: T) => void>>();
 

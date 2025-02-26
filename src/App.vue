@@ -11,6 +11,7 @@ import Layout from './components/pages/Layout.vue';
 import Button from './components/slots/Button.vue';
 import Dialog from './components/slots/Dialog.vue';
 import Tab from './components/tabs/Tab.vue';
+import PostList from './components/post/PostList.vue';
 const pubsub = new PubSub<Pizza>()
 
 const phone = reactive(useInput());
@@ -23,7 +24,11 @@ function handlerclick(ev:Event){
 </script>
 
 <template> 
+    <Suspense>
+        <PostList/>
+    </Suspense>
     
+    <!--
     <Button @click="handlerclick($event)">Abrir dialog</Button>
     <Dialog ref="dialog">
         <input>
@@ -32,7 +37,6 @@ function handlerclick(ev:Event){
         <input v-focus>
     </Dialog>
     <Tab/>
-    <!--
      <Button @click="handlerclick($event)">Abrir dialog</Button>
     <Dialog ref="dialog">
         <h1>Dialog</h1>
