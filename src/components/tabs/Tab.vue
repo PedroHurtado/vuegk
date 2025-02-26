@@ -3,9 +3,11 @@ import { ref } from 'vue';
 import Panel1 from './Panel1.vue'
 import Panel2 from './Panel2.vue'
 const currentTab = ref('panel1')
+
 const changeTab = (tabId: string) => {
     currentTab.value = tabId
 }
+
 const tabs = [
     {
         id: 'panel1', text: "Panel 1", component: Panel1
