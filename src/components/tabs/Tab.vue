@@ -6,30 +6,31 @@ const currentTab = ref('panel1')
 const changeTab = (tabId: string) => {
     currentTab.value = tabId
 }
-const tabs = [{
-    id: 'panel1', text: "Panel 1", component: Panel1
-},
-{
-    id: 'panel2', text: "Panel 2", component: Panel2
-}
+const tabs = [
+    {
+        id: 'panel1', text: "Panel 1", component: Panel1
+    },
+    {
+        id: 'panel2', text: "Panel 2", component: Panel2
+    }
 ]
 
-const getComponent = ()=>{
-    const tab =tabs.find(tab => tab.id === currentTab.value)
-    if(tab){
+const getComponent = () => {
+    const tab = tabs.find(tab => tab.id === currentTab.value)
+    if (tab) {
         return tab.component;
     }
-    
+
 }
 </script>
 
 <template>
     <div>
-        <button v-for="tab in tabs" :key="tab.id" @click="changeTab(tab.id)">{{tab.text}}</button>
+        <button v-for="tab in tabs" :key="tab.id" @click="changeTab(tab.id)">{{ tab.text }}</button>
     </div>
     <div>
         <KeepAlive>
-            <component :is="getComponent()"/>
+            <component :is="getComponent()" />
         </KeepAlive>
     </div>
 </template>
