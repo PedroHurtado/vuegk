@@ -10,6 +10,7 @@ import { provide } from 'vue';
 import Layout from './components/pages/Layout.vue';
 import Button from './components/slots/Button.vue';
 import Dialog from './components/slots/Dialog.vue';
+import Tab from './components/tabs/Tab.vue';
 const pubsub = new PubSub<Pizza>()
 
 const phone = reactive(useInput());
@@ -23,12 +24,13 @@ function handlerclick(ev:Event){
 
 <template> 
     
-    <Button @click="handlerclick($event)">Abrir dialog</Button>
+    <Tab/>
+    <!--
+     <Button @click="handlerclick($event)">Abrir dialog</Button>
     <Dialog ref="dialog">
         <h1>Dialog</h1>
         <p>Contenido del dialog</p>
     </Dialog>
-    <!--
     <Layout/>
     <Input v-model="phone.value" label="Teléfono" id="phone" />
     {{ phone.value }}
