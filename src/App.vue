@@ -24,6 +24,13 @@ function handlerclick(ev:Event){
 
 <template> 
     
+    <Button @click="handlerclick($event)">Abrir dialog</Button>
+    <Dialog ref="dialog">
+        <input>
+        <input>
+        <input>
+        <input v-focus>
+    </Dialog>
     <Tab/>
     <!--
      <Button @click="handlerclick($event)">Abrir dialog</Button>
