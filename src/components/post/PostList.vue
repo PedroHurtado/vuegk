@@ -7,15 +7,14 @@ interface Post {
 }
 
 const url = "https://my-json-server.typicode.com/typicode/demo/posts"
-const { loading, data, error } = await useQuery<Post[]>(url);
+const { data, error } = await useQuery<Post[]>(url);
 
 ;
 </script>
 
 <template>
   <div>
-    <h1>Post List</h1>
-    <p v-if="loading">Cargando...</p>
+    <h1>Post List</h1>    
     <p v-if="error">Error: {{error}}</p>
     <ul v-if="data">
       <li v-for="p in data" :key="p.id">{{ p.title }}</li>

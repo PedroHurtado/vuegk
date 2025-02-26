@@ -26,6 +26,9 @@ function handlerclick(ev:Event){
 <template> 
     <Suspense>
         <PostList/>
+        <template #fallback>
+            Loading...
+        </template>
     </Suspense>
     
     <!--
