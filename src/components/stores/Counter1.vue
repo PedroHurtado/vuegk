@@ -11,7 +11,7 @@ const { increment } = store;
     <h2>Counter 1</h2>
     <div>
         <p>Counter1: {{ count }}</p>
-        <p>Product1: {{ countSquared }}</p>
+        <p>Cuadrado1: {{ countSquared }}</p>
         <button @click="increment">Increment</button>
     </div>
 </template>

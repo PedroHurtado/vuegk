@@ -8,5 +8,8 @@ export const counterStore = (id: string) =>
         const increment = () => {
             count.value++;
         };
-        return { count,countSquared, increment };
+        const reset =()=>{
+            count.value = 0;
+        }
+        return { count,countSquared, increment,reset };
     })();
