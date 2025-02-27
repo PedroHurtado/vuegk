@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { counterStore,   } from './conunterstore';
-const store = counterStore('2')
+
+const store = counterStore(crypto.randomUUID());
 const { count } = storeToRefs(store);
 const { increment } = store;
+
 </script>
 <template>
     <h2>Counter 2</h2>
