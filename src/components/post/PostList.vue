@@ -13,7 +13,7 @@ const getUrl=(page:number)=>{
 const page = ref(1);
 const url = ref(getUrl(page.value));
 
-const { data, error } = useQuery<Post>(url);
+const { data, error, loading } = useQuery<Post>(url);
 
 
 const nextPage = () => {
@@ -35,6 +35,7 @@ const prevPage = () => {
   <div>
     <h1>Post List</h1>
     <p v-if="error">Error: {{ error.message }}</p>
+    <p v-if="loading">Loading...</p>
     <div v-if="data">{{data.title }}</div>
     <div>
       <button @click="prevPage" :disabled="page === 1">Anterior</button>
