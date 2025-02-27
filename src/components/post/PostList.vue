@@ -39,7 +39,7 @@ const prevPage = () => {
     <div v-if="data">{{data.title }}</div>
     <div>
       <button @click="prevPage" :disabled="page === 1">Anterior</button>
-      <button @click="nextPage">Siguiente</button>
+      <button @click="nextPage" :disabled="error!==null">Siguiente</button>
     </div>
   </div>
 </template>
