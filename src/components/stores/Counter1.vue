@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import { counterStore   } from './conunterstore';
 
 const store = counterStore(crypto.randomUUID());
-const { count } = storeToRefs(store);
+const { count,product } = storeToRefs(store);
 const { increment } = store;
 
 </script>
@@ -11,6 +11,7 @@ const { increment } = store;
     <h2>Counter 1</h2>
     <div>
         <p>Counter1: {{ count }}</p>
+        <p>Product1: {{ product }}</p>
         <button @click="increment">Increment</button>
     </div>
 </template>
