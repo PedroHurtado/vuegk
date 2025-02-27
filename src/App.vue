@@ -13,6 +13,7 @@ import Dialog from './components/slots/Dialog.vue';
 import Tab from './components/tabs/Tab.vue';
 import PostList from './components/post/PostList.vue';
 import Counters from './components/stores/Counters.vue';
+import AddTodo from './components/todos/AddTodo.vue';
 const pubsub = new PubSub<Pizza>()
 
 const phone = reactive(useInput());
@@ -26,9 +27,10 @@ function handlerclick(ev:Event){
 
 <template> 
     
-    <Counters/>
+    <AddTodo/>
     
     <!--
+    <Counters/>
     <Suspense>
         <PostList/>
         <PostList/>
