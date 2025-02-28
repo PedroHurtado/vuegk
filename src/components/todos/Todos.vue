@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-
+import { ref, computed, onMounted } from 'vue';
+import { useQuery } from '@/services/usequery';
 import AddTodo from './AddTodo.vue';
 import RemoveTodo from './RemoveTodo.vue'
 import UpdateTodo from './UpdateTodo.vue';
 import CompletedTodo from './CompletedTodo.vue';
 
-import { todosStore } from './todosStore';
+import { todosStore, type Todo } from './todosStore';
 
-const { getTodos } = todosStore();
+const { getTodos,init } = todosStore();
 
+onMounted(() => {
+  const {data} = useQuery<Todo[]>(ref('http://localhost:3000/todos'))
+  if(data){
+    init(data.value);  
+  }
+});
 const todos = computed(() => getTodos());
 const hasTodos = computed(() => todos.value.length > 0);
 const componentName = ref('');

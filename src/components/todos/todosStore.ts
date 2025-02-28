@@ -12,6 +12,13 @@ export const todosStore = defineStore("todos",()=>{
     const addTodo = (todo: Todo) => {
         todos.value.push(todo);
     }
+    const init = (todosData: Todo[] |null) => {
+        if(todosData)
+        {
+            todos.value = todosData;
+        }        
+    }
+
     const removeTodo = (id: string) => {
         todos.value = todos.value.filter((todo) => todo.id !== id);
     }
@@ -33,5 +40,5 @@ export const todosStore = defineStore("todos",()=>{
     const getTodo = (id: string) => {
         return todos.value.find((todo) => todo.id === id);
     }
-    return {addTodo,removeTodo,getTodo,getTodos,toggleTodo, updateTodo}
+    return {addTodo,removeTodo,getTodo,getTodos,toggleTodo, updateTodo, init}
 });
