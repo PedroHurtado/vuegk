@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref,computed } from 'vue';
+
 import AddTodo from './AddTodo.vue';
 import RemoveTodo from  './RemoveTodo.vue'
 import UpdateTodo from './UpdateTodo.vue';
 import CompletedTodo from './CompletedTodo.vue';
+
 import { todosStore } from './todosStore';
-import { computed } from 'vue';
 
 const { getTodos } = todosStore();
+
 const todos = computed(() => getTodos());
 const hasTodos = computed(() => todos.value.length > 0);
-
 const componentName = ref('');
 const componentKey = ref(0);
 const todoId = ref('');
+
 const handlerAction = (ev: Event) => {
   const node = (ev.composedPath() as HTMLElement[]).find(
     (n) => n.dataset && 'action' in n.dataset
@@ -31,17 +33,19 @@ const handlerAction = (ev: Event) => {
   }
 };
 
-const getComponent = () => {
-  const result = components.find(c => c.action === componentName.value)?.component || null;    
-  return result;
-};
-
 const components = [
   { action: 'add', component: AddTodo },
   { action: 'remove', component: RemoveTodo },
   { action: 'edit', component: UpdateTodo },
   { action: 'complete', component: CompletedTodo },
 ];
+
+const getComponent = () => {
+  const result = components.find(c => c.action === componentName.value)?.component || null;    
+  return result;
+};
+
+
 </script>
 
 <template>

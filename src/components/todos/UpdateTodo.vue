@@ -8,10 +8,12 @@ const { todoId } = defineProps({
         required: true
     }
 })
+const { getTodo, updateTodo } = todosStore()
+
 const dialog = ref()
 const todo = ref<Todo>();
 const description = ref('')
-const { getTodo, updateTodo } = todosStore()
+
 onMounted(() => {
     if(todoId){
         todo.value = getTodo(todoId)
@@ -19,6 +21,7 @@ onMounted(() => {
         dialog.value?.open()
     }    
 })
+
 const confirm = () => {
     if(description.value){
         updateTodo(todoId,description.value)

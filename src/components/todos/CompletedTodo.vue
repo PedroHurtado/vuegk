@@ -8,15 +8,18 @@ const {todoId} = defineProps({
         required: true
     }
 })
+
+const {getTodo,toggleTodo} = todosStore()
 const dialog = ref()
 const todo = ref<Todo>();
-const {getTodo,toggleTodo} = todosStore()
+
 onMounted(()=>{   
     if(todoId){
         todo.value = getTodo(todoId)
         dialog.value?.open()    
     }    
 })
+
 const confirm = ()=>{
     toggleTodo(todoId)
 }

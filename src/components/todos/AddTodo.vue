@@ -6,6 +6,7 @@ import Dialog from '../slots/Dialog.vue';
 const { addTodo } = todosStore()
 const dialog = ref()
 const description = ref('')
+
 onMounted(() => {
     dialog.value?.open()
 })
