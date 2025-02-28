@@ -1,29 +1,35 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { todosStore } from './todosStore';
+import { ref, onMounted } from 'vue';
 import Dialog from '../slots/Dialog.vue';
-
-const { addTodo } = todosStore()
+import { todosStore, type Todo } from './todosStore';
+const { todoId } = defineProps({
+    todoId: {
+        type: String,
+        required: true
+    }
+})
 const dialog = ref()
+const todo = ref<Todo>();
 const description = ref('')
+const { getTodo, updateTodo } = todosStore()
 onMounted(() => {
-    dialog.value?.open()
+    if(todoId){
+        todo.value = getTodo(todoId)
+        description.value = todo.value?.description || ''
+        dialog.value?.open()
+    }    
 })
 const confirm = () => {
-    if (description.value) {
-        addTodo({
-            id: crypto.randomUUID(),
-            description: description.value,
-            completed: false
-        })
+    if(description.value){
+        updateTodo(todoId,description.value)
     }
-
 }
+
 </script>
 <template>
     <Dialog ref="dialog" @confirm="confirm">
         <div class="content">
-            <h2>Crear todo</h2>
+            <h2>Modificar Todo</h2>
             <div class="control">
                 <label for="description">Introduzca la description</label>
                 <input type="text" id="description" v-model="description">
@@ -32,10 +38,11 @@ const confirm = () => {
     </Dialog>
 </template>
 <style scoped>
-.content{
+.content {
     width: 90%;
     margin: auto;
 }
+
 .control {
     display: flex;
     width: 100%;

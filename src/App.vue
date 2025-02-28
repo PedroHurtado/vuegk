@@ -13,7 +13,7 @@ import Dialog from './components/slots/Dialog.vue';
 import Tab from './components/tabs/Tab.vue';
 import PostList from './components/post/PostList.vue';
 import Counters from './components/stores/Counters.vue';
-import AddTodo from './components/todos/AddTodo.vue';
+import Todos from './components/todos/Todos.vue';
 const pubsub = new PubSub<Pizza>()
 
 const phone = reactive(useInput());
@@ -30,6 +30,10 @@ function close(){
 
 <template> 
     
+    <Todos/>
+    
+    
+    <!--
     <Button @click="handlerclick($event)">Abrir dialog</Button>
     <Dialog ref="dialog" @confirm="close">
         <input>
@@ -37,9 +41,6 @@ function close(){
         <input>
         <input v-focus>
     </Dialog>
-    
-    <!--
-    <AddTodo/>
     <Counters/>
     <Suspense>
         <PostList/>
