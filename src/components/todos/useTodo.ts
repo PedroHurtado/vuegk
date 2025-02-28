@@ -1,7 +1,7 @@
 // useTodo.ts
 import { ref, onMounted } from 'vue';
 import { todosStore, type Todo } from './todosStore';
-
+import { useAction, type FetchOptions } from '@/services/useAction';
 export function useTodo(todoId?: string) {
     const { getTodo, addTodo, toggleTodo, removeTodo, updateTodo } = todosStore();
     const dialog = ref();
@@ -23,19 +23,33 @@ export function useTodo(todoId?: string) {
         
     });
 
-    const addNewTodo = () => {
+    const addNewTodo = async () => {
         if (description.value) {
-            addTodo({
+            const todo:Todo = {
                 id: crypto.randomUUID(),
                 description: description.value,
                 completed: false
-            });
+            }
+            const url = 'http://localhost:3000/todos'
+            const request:FetchOptions={
+                method: 'POST',                
+                body: JSON.stringify(todo),
+                headers: {
+                    'Content-Type': 'application/json',                   
+                  }
+            }
+            await useAction(url,request)
+            addTodo(todo);
         }
     };
 
     const toggleTodoStatus = () => {
-        if (todoId) {
-            toggleTodo(todoId);
+        if (todoId) {            
+            const todo:Todo = getTodo(todoId)
+            if(todo){
+                toggleTodo(todoId);
+            }
+            
         }
     };
 

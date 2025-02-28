@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { useQuery } from '@/services/usequery';
 import AddTodo from './AddTodo.vue';
 import RemoveTodo from './RemoveTodo.vue'
@@ -7,17 +7,15 @@ import UpdateTodo from './UpdateTodo.vue';
 import CompletedTodo from './CompletedTodo.vue';
 
 import { todosStore, type Todo } from './todosStore';
+import { watch } from 'vue';
 
-const { getTodos,init } = todosStore();
+const {init} = todosStore();
 
-onMounted(() => {
-  const {data} = useQuery<Todo[]>(ref('http://localhost:3000/todos'))
-  if(data){
-    init(data.value);  
-  }
+const {data} = useQuery<Todo[]>(ref('http://localhost:3000/todos'))
+watch(data, (newData) => {
+  init(newData);
 });
-const todos = computed(() => getTodos());
-const hasTodos = computed(() => todos.value.length > 0);
+
 const componentName = ref('');
 const componentKey = ref(0);
 const todoId = ref('');
@@ -61,8 +59,8 @@ const getComponent = () => {
       <button data-action="add" class="add-btn">Añadir</button>
     </div>
 
-    <ul v-if="hasTodos">
-      <li class="todo" v-for="todo in todos" :key="todo.id">
+    <ul v-if="data">
+      <li class="todo" v-for="todo in data" :key="todo.id">
         <p>{{ todo.description }}</p>
         <button data-action="complete" :data-id="todo.id">
           {{ todo.completed ? 'Activar' : 'Completar' }}

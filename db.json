@@ -2,8 +2,13 @@
   "todos": [
     {
       "id": "e978f645-0d8f-4b8d-a740-bf786520e49e",
-      "name": "pepito de los palotes",
+      "description": "pepito de los palotes",
       "complete": false
+    },
+    {
+      "id": "90f9276e-ebef-46fe-a062-7b309d34067c",
+      "description": "Nueva",
+      "completed": false
     }
   ]
 }
