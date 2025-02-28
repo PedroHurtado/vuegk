@@ -1,25 +1,13 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { todosStore } from './todosStore';
 import Dialog from '../slots/Dialog.vue';
 
-const { addTodo } = todosStore()
-const dialog = ref()
-const description = ref('')
+import { useTodo } from './useTodo';
+const { dialog, description, addNewTodo } = useTodo();
 
-onMounted(() => {
-    dialog.value?.open()
-})
 const confirm = () => {
-    if (description.value) {
-        addTodo({
-            id: crypto.randomUUID(),
-            description: description.value,
-            completed: false
-        })
-    }
+    addNewTodo();
+};
 
-}
 </script>
 <template>
     <Dialog ref="dialog" @confirm="confirm">

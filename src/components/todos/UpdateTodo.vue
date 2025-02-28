@@ -1,32 +1,21 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import Dialog from '../slots/Dialog.vue';
-import { todosStore, type Todo } from './todosStore';
+
+import { defineProps } from 'vue';
+import { useTodo } from './useTodo';
+
 const { todoId } = defineProps({
     todoId: {
         type: String,
         required: true
     }
-})
-const { getTodo, updateTodo } = todosStore()
+});
 
-const dialog = ref()
-const todo = ref<Todo>();
-const description = ref('')
-
-onMounted(() => {
-    if(todoId){
-        todo.value = getTodo(todoId)
-        description.value = todo.value?.description || ''
-        dialog.value?.open()
-    }    
-})
+const { dialog, description, updateExistingTodo } = useTodo(todoId);
 
 const confirm = () => {
-    if(description.value){
-        updateTodo(todoId,description.value)
-    }
-}
+    updateExistingTodo();
+};
 
 </script>
 <template>

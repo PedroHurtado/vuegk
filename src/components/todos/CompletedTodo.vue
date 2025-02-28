@@ -1,28 +1,21 @@
 <script setup lang="ts">
-import { ref,onMounted } from 'vue';
 import Dialog from '../slots/Dialog.vue';
-import { todosStore, type Todo } from './todosStore';
-const {todoId} = defineProps({
+
+import { defineProps } from 'vue';
+import { useTodo } from './useTodo';
+
+const { todoId } = defineProps({
     todoId: {
         type: String,
         required: true
     }
-})
+});
 
-const {getTodo,toggleTodo} = todosStore()
-const dialog = ref()
-const todo = ref<Todo>();
+const { dialog, todo, toggleTodoStatus } = useTodo(todoId);
 
-onMounted(()=>{   
-    if(todoId){
-        todo.value = getTodo(todoId)
-        dialog.value?.open()    
-    }    
-})
-
-const confirm = ()=>{
-    toggleTodo(todoId)
-}
+const confirm = () => {
+    toggleTodoStatus();
+};
 
 </script>
 <template>
