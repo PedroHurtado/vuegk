@@ -44,12 +44,8 @@ export function useTodo(todoId?: string) {
     };
 
     const toggleTodoStatus = () => {
-        if (todoId) {            
-            const todo:Todo = getTodo(todoId)
-            if(todo){
-                toggleTodo(todoId);
-            }
-            
+        if (todoId) {                       
+            toggleTodo(todoId);
         }
     };
 

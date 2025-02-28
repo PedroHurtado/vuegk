@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useQuery } from '@/services/usequery';
 import AddTodo from './AddTodo.vue';
 import RemoveTodo from './RemoveTodo.vue'
