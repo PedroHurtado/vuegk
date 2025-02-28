@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref,computed } from 'vue';
+import { ref, computed } from 'vue';
 
 import AddTodo from './AddTodo.vue';
-import RemoveTodo from  './RemoveTodo.vue'
+import RemoveTodo from './RemoveTodo.vue'
 import UpdateTodo from './UpdateTodo.vue';
 import CompletedTodo from './CompletedTodo.vue';
 
@@ -22,11 +22,11 @@ const handlerAction = (ev: Event) => {
   );
   if (node) {
     const { action, id } = node.dataset;
-    if (action) { 
-      todoId.value = '';     
+    if (action) {
+      todoId.value = '';
       componentName.value = action;
-      componentKey.value += 1; 
-      if(id){
+      componentKey.value += 1;
+      if (id) {
         todoId.value = id
       }
     }
@@ -41,8 +41,9 @@ const components = [
 ];
 
 const getComponent = () => {
-  const result = components.find(c => c.action === componentName.value)?.component || null;    
-  return result;
+  return components.find(
+    c => c.action === componentName.value
+  )?.component || null;
 };
 
 
@@ -56,23 +57,18 @@ const getComponent = () => {
 
     <ul v-if="hasTodos">
       <li class="todo" v-for="todo in todos" :key="todo.id">
-        <p>{{ todo.description }}</p>        
+        <p>{{ todo.description }}</p>
         <button data-action="complete" :data-id="todo.id">
-          {{ todo.completed ?   'Activar' :'Completar' }}
+          {{ todo.completed ? 'Activar' : 'Completar' }}
         </button>
-        <button data-action="edit" :data-id="todo.id">Editar</button>        
+        <button data-action="edit" :data-id="todo.id">Editar</button>
         <button data-action="remove" :data-id="todo.id">Eliminar</button>
       </li>
     </ul>
 
     <p v-else class="empty-message">No hay todos</p>
 
-    <component 
-      v-if="componentName" 
-      :is="getComponent()" 
-      :key="componentKey"
-      :todoId="todoId" 
-    />
+    <component v-if="componentName" :is="getComponent()" :key="componentKey" :todoId="todoId" />
   </div>
 </template>
 
@@ -158,4 +154,3 @@ ul {
   opacity: 0.8;
 }
 </style>
-

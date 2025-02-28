@@ -18,10 +18,9 @@ export function useTodo(todoId?: string) {
             if (todo.value) {
                 description.value = todo.value.description;
             }
-            openDialog();
-        } else {
-            openDialog();
         }
+        openDialog();
+        
     });
 
     const addNewTodo = () => {

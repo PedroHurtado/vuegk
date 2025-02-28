@@ -13,13 +13,10 @@ const { todoId } = defineProps({
 
 const { dialog, todo, toggleTodoStatus } = useTodo(todoId);
 
-const confirm = () => {
-    toggleTodoStatus();
-};
 
 </script>
 <template>
-    <Dialog ref="dialog" @confirm="confirm">
+    <Dialog ref="dialog" @confirm="toggleTodoStatus">
         <div class="content">
             <h2>Completar Todo</h2>
             <p>{{todo?.description}}</p>

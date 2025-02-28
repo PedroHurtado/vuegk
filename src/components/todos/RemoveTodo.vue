@@ -12,15 +12,12 @@ const { todoId } = defineProps({
 
 const { dialog, todo, removeExistingTodo } = useTodo(todoId);
 
-const confirm = () => {
-    removeExistingTodo();
-};
 
 </script>
 <template>
-    <Dialog ref="dialog" @confirm="confirm">
+    <Dialog ref="dialog" @confirm="removeExistingTodo">
         <div class="content">
-            <h2>Eliminar Todo</h2>
+            <h2>Eliminar Todo</h2>            
             <p>{{todo?.description}}</p>
         </div>
     </Dialog>

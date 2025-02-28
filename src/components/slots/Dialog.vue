@@ -1,26 +1,37 @@
 <script lang="ts" setup>
 import { ref, defineEmits } from 'vue';
+
 const dialog = ref<HTMLDialogElement | null>(null);
 const emit = defineEmits(["confirm"]);
 
 const open = () => {
     dialog.value?.showModal();
 };
+
 const close = (ev: Event) => {
     ev.stopPropagation();
     dialog.value?.close();
 };
+
 const confirm = (ev: Event) => {
     ev.preventDefault();
     emit("confirm");
     dialog.value?.close();
 };
 
+const handleKeydown = (ev: KeyboardEvent) => {
+    if (ev.key === "Enter") {
+        ev.stopPropagation()
+        ev.preventDefault();  // Prevenir el comportamiento predeterminado de Enter
+        confirm(ev);  // Llamar a la función de confirmación
+    }
+};
+
 defineExpose({ open });
 </script>
 
 <template>
-    <dialog ref="dialog" class="custom-dialog">
+    <dialog ref="dialog" class="custom-dialog" @keydown="handleKeydown">
         <form method="dialog" class="dialog-content" @submit="confirm">
             <section class="dialog-body">
                 <slot></slot>
@@ -32,6 +43,7 @@ defineExpose({ open });
         </form>
     </dialog>
 </template>
+
 
 <style scoped>
 .custom-dialog {

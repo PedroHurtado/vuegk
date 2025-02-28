@@ -4,13 +4,10 @@ import Dialog from '../slots/Dialog.vue';
 import { useTodo } from './useTodo';
 const { dialog, description, addNewTodo } = useTodo();
 
-const confirm = () => {
-    addNewTodo();
-};
 
 </script>
 <template>
-    <Dialog ref="dialog" @confirm="confirm">
+    <Dialog ref="dialog" @confirm="addNewTodo">
         <div class="content">
             <h2>Crear todo</h2>
             <div class="control">

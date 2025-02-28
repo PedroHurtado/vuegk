@@ -13,13 +13,10 @@ const { todoId } = defineProps({
 
 const { dialog, description, updateExistingTodo } = useTodo(todoId);
 
-const confirm = () => {
-    updateExistingTodo();
-};
 
 </script>
 <template>
-    <Dialog ref="dialog" @confirm="confirm">
+    <Dialog ref="dialog" @confirm="updateExistingTodo">
         <div class="content">
             <h2>Modificar Todo</h2>
             <div class="control">
