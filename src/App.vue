@@ -23,13 +23,23 @@ const dialog = ref();
 function handlerclick(ev:Event){
     dialog.value.open();
 }
+function close(){
+    console.log("confirmado")
+}
 </script>
 
 <template> 
     
-    <AddTodo/>
+    <Button @click="handlerclick($event)">Abrir dialog</Button>
+    <Dialog ref="dialog" @confirm="close">
+        <input>
+        <input>
+        <input>
+        <input v-focus>
+    </Dialog>
     
     <!--
+    <AddTodo/>
     <Counters/>
     <Suspense>
         <PostList/>
