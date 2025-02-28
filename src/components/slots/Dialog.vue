@@ -26,7 +26,7 @@ defineExpose({ open });
                 <slot></slot>
             </section>
             <menu class="dialog-footer">
-                <button @click="close($event)" class="button close">Cerrar</button>
+                <button type="button" @click="close($event)" class="button close">Cerrar</button>
                 <button type="submit" class="button accept">Aceptar</button>
             </menu>
         </form>
